@@ -34,4 +34,4 @@ curl http://localhost:11434/api/chat -d '{
     {"role":"user","content":"한국어를 자연스러운 영어로 번역: 우리는 색보정을 자동화하고 있습니다."}
   ],
   "options":{"temperature":0.2}
-}'
+}' | jq -r 'select(.done==true) | .message.content'
