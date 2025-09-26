@@ -1,7 +1,7 @@
-# Ollama + Gemma 3 CPU Translation Server
+# Ollama CPU Server
 
 이 저장소는 **[Ollama](https://github.com/ollama/ollama)** 런타임 위에서 **Google Gemma 3** 모델을 CPU 환경에서 실행하여  
-간단한 **번역 서버**(REST API)를 구축하는 예제를 제공합니다.
+간단한 REST API를 구축하는 예제를 제공합니다.
 
 ## 🚀 특징
 - **CPU 기반 실행**: GPU 없이도 Gemma 3 모델 구동 가능 (느릴 수 있음).
