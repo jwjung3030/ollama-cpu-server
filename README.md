@@ -21,7 +21,7 @@ cd ollama-cpu-server
 ### 2. 기동 & 모델 풀
 ```bash
 docker compose up -d
-docker exec -it gemma3-ollama ollama pull gemma3:4b
+docker exec -it ollama-server ollama pull gemma3:4b
 
 ```
 
