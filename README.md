@@ -13,7 +13,7 @@
 
 ### 1. 저장소 클론
 ```bash
-git clone https://github.com/jwjung3030/ollama-cpu-server
+git clone -b feature/ollama-test-client --single-branch https://github.com/jwjung3030/ollama-cpu-server.git
 cd ollama-cpu-server
 
 ```
