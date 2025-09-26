@@ -16,6 +16,7 @@
 git clone https://github.com/jwjung3030/ollama-cpu-server
 cd ollama-gemma3-cpu-server
 
+---
 
 ### 2. 기동 & 모델 풀
 ```bash
