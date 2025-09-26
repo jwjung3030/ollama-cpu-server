@@ -13,27 +13,30 @@
 
 ### 1. 저장소 클론
 ```bash
-git clone https://github.com/jwjung3030/ollama-cpu-server
+git clone -b feature/ollama-test-client --single-branch https://github.com/jwjung3030/ollama-cpu-server.git
 cd ollama-cpu-server
 
 ```
 
-### 2. 기동 & 모델 풀
+### 실행 패턴
+
 ```bash
-docker compose up -d
-docker exec -it ollama-server ollama pull gemma3:4b
+1) 둘 다 켜서 교차 접속 테스트 (권장)
+docker compose --profile server --profile test up -d --build
+docker exec -it ollama ollama pull gemma3:4b
+docker exec -it ollama-test python /app/translate.py "한국어를 자연스러운 영어로 번역: 강아지가 잔디밭을 뛰어다닌다."
+
+2) 서버만 운영(개발/배포용)
+docker compose --profile server up -d
+# 필요 시 호스트에서 curl로 점검
+curl -s http://localhost:11434/api/tags
+
+
+3) 테스트 컨테이너만 (외부/공용 Ollama 서버에 붙일 때)
+# 공용 서버가 10.0.0.5:11434 라면
+docker compose --profile test run --rm \
+  -e OLLAMA_HOST=http://10.0.0.5:11434 \
+  -e OLLAMA_MODEL=gemma3:4b \
+  ollama-test python /app/translate.py "…문장…"
 
 ```
-
-### 3. REST 호출 (Ollama Chat API)
-```bash
-curl -s http://localhost:11434/api/chat -d '{
-  "model":"gemma3:4b",
-  "messages":[
-    {"role":"system","content":"You are a translation engine. Output only the translation."},
-    {"role":"user","content":"한국어를 자연스러운 영어로 번역: 강아지가 잔디밭을 뛰어다닌다."}
-  ],
-  "options":{"temperature":0.2},
-  "stream":false
-}' | grep -o '"content":"[^"]*"' | sed 's/"content":"//;s/"$//'
-
