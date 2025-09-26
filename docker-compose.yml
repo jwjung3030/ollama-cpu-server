@@ -1,13 +1,23 @@
+version: "3.8"
+
 services:
   ollama:
     image: ollama/ollama:latest
-    container_name: ollama-server
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities: [gpu]
-    volumes:
-      - ./ollama:/root/.ollama
+    container_name: ollama
     ports:
       - "11434:11434"
+    volumes:
+      - ./ollama:/root/.ollama
+    profiles: ["server"]
+
+  ollama-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.ollama_test
+    container_name: ollama-test
+    environment:
+      # 같은 compose 네트워크에서 서버에 붙을 때
+      - OLLAMA_HOST=http://ollama:11434
+      - OLLAMA_MODEL=gemma3:4b
+    command: ["bash", "-lc", "sleep infinity"]
+    profiles: ["test"]
