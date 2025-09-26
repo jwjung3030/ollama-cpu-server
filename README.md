@@ -15,3 +15,20 @@
 ```bash
 git clone https://github.com/jwjung3030/ollama-cpu-server
 cd ollama-gemma3-cpu-server
+
+
+### 2. 기동 & 모델 풀
+```bash
+docker compose up -d
+docker exec -it gemma3-ollama ollama pull gemma3:4b
+
+### 3. REST 호출 (Ollama Chat API)
+```bash
+curl http://localhost:11434/api/chat -d '{
+  "model":"gemma3:4b",
+  "messages":[
+    {"role":"system","content":"You are a translation engine. Output only the translation."},
+    {"role":"user","content":"한국어를 자연스러운 영어로 번역: 우리는 색보정을 자동화하고 있습니다."}
+  ],
+  "options":{"temperature":0.2}
+}'
