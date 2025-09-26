@@ -13,5 +13,5 @@
 
 ### 1. 저장소 클론
 ```bash
-git clone https://github.com/<YOUR_ORG>/ollama-gemma3-cpu-server.git
+git clone https://github.com/jwjung3030/ollama-cpu-server
 cd ollama-gemma3-cpu-server
