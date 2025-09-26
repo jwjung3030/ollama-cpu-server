@@ -27,11 +27,13 @@ docker exec -it ollama-server ollama pull gemma3:4b
 
 ### 3. REST 호출 (Ollama Chat API)
 ```bash
-curl http://localhost:11434/api/chat -d '{
+curl -s http://localhost:11434/api/chat -d '{
   "model":"gemma3:4b",
   "messages":[
     {"role":"system","content":"You are a translation engine. Output only the translation."},
-    {"role":"user","content":"한국어를 자연스러운 영어로 번역: 우리는 색보정을 자동화하고 있습니다."}
+    {"role":"user","content":"한국어를 자연스러운 영어로 번역: 강아지가 잔디밭을 뛰어다닌다."}
   ],
-  "options":{"temperature":0.2}
-}' | jq -r 'select(.done==true) | .message.content'
+  "options":{"temperature":0.2},
+  "stream":false
+}' | grep -o '"content":"[^"]*"' | sed 's/"content":"//;s/"$//'
+
