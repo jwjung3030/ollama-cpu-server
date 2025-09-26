@@ -16,12 +16,14 @@
 git clone https://github.com/jwjung3030/ollama-cpu-server
 cd ollama-gemma3-cpu-server
 
----
+```
 
 ### 2. 기동 & 모델 풀
 ```bash
 docker compose up -d
 docker exec -it gemma3-ollama ollama pull gemma3:4b
+
+```
 
 ### 3. REST 호출 (Ollama Chat API)
 ```bash
