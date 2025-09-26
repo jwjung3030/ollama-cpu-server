@@ -20,6 +20,7 @@ cd ollama-cpu-server
 
 ### 실행 패턴
 
+```bash
 1) 둘 다 켜서 교차 접속 테스트 (권장)
 docker compose --profile server --profile test up -d --build
 docker exec -it ollama ollama pull gemma3:4b
@@ -37,3 +38,5 @@ docker compose --profile test run --rm \
   -e OLLAMA_HOST=http://10.0.0.5:11434 \
   -e OLLAMA_MODEL=gemma3:4b \
   ollama-test python /app/translate.py "…문장…"
+
+```
