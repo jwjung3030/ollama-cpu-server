@@ -24,7 +24,7 @@ cd ollama-cpu-server
 1) 둘 다 켜서 교차 접속 테스트 (권장)
 docker compose --profile server --profile test up -d --build
 docker exec -it ollama ollama pull gemma3:4b
-docker exec -it ollama-test python /app/translate.py "한국어를 자연스러운 영어로 번역: 강아지가 잔디밭을 뛰어다닌다."
+docker exec -it ollama-test python /app/translate.py "강아지가 잔디밭을 뛰어다닌다."
 
 2) 서버만 운영(개발/배포용)
 docker compose --profile server up -d
