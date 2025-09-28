@@ -9,7 +9,7 @@ def translate(text: str, temperature: float = 0.2) -> str:
         "model": MODEL,
         "messages": [
             {"role": "system", "content": "You are a translation engine. Output only the translation."},
-            {"role": "user", "content": text}
+            {"role": "user", "content": f"Translate to English:\n{text}"}
         ],
         "options": {"temperature": temperature},
         "stream": False
